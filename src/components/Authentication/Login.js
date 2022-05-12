@@ -3,11 +3,13 @@ import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input'
 import { VStack } from '@chakra-ui/layout'
 import { useState } from 'react'
-
+import { useHistory } from 'react-router'
 import { useToast } from '@chakra-ui/react'
-import { useHistory } from 'react-router-dom'
+
 
 import FirebaseApp from '../../firebase'
+
+import {loginUser} from "../../api/user/userApi"
 
 const Login = () => {
     const [show, setShow] = useState(false)
@@ -16,7 +18,6 @@ const Login = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [loading, setLoading] = useState(false)
-
     const history = useHistory()
 
     const submitHandler = async () => {
@@ -32,48 +33,41 @@ const Login = () => {
             setLoading(false)
             return
         }
-
-        // console.log(email, password);
+        
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-type': 'application/json',
-            //     },
-            // }
+            console.log(email, password)
+            loginUser({ email, password })
 
-            // const { data } = await axios.post(
-            //     '/api/user/login',
-            //     { email, password },
-            //     config
-            // )
+            // const data = await FirebaseApp.auth()
+            //     .signInWithEmailAndPassword(email, password)
+            //     .catch(function (error) {
+            //         throw error
+            //     })
 
-            const data = await FirebaseApp.auth()
-                .signInWithEmailAndPassword(email, password)
-                .catch(function (error) {
-                    throw error
-                })
+            // console.log(data)
 
-            console.log(data)
-
-            toast({
-                title: 'Login Successful',
-                status: 'success',
-                duration: 5000,
-                isClosable: true,
-                position: 'bottom',
-            })
-            localStorage.setItem('userInfo', JSON.stringify(data))
+            // toast({
+            //     title: 'Login Successful',
+            //     status: 'success',
+            //     duration: 5000,
+            //     isClosable: true,
+            //     position: 'bottom',
+            // })
+            // localStorage.setItem('userInfo', JSON.stringify(data))
             setLoading(false)
             history.push('/chats')
+            history.go()
+            
         } catch (error) {
-            toast({
-                title: 'Error Occured!',
-                description: error.response.data.message,
-                status: 'error',
-                duration: 5000,
-                isClosable: true,
-                position: 'bottom',
-            })
+            // toast({
+            //     title: 'Error Occured!',
+            //     description: error.response.data.message,
+            //     status: 'error',
+            //     duration: 5000,
+            //     isClosable: true,
+            //     position: 'bottom',
+            // })
+            console.log(error)
             setLoading(false)
         }
     }

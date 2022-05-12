@@ -9,7 +9,6 @@ import { Box,
 
 import React from 'react'
 //import { useEffect } from "react";
-//import { useHistory } from "react-router";
 import Login from "../components/Authentication/Login";
 import Signup from "../components/Authentication/Signup";
 

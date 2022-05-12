@@ -5,6 +5,7 @@ import { VStack } from '@chakra-ui/layout'
 import { useToast } from '@chakra-ui/toast'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
+import postUser from '../../api/user/userApi'
 
 // Firebase Auth
 import firebaseApp from '../../firebase'
@@ -57,21 +58,7 @@ const Signup = () => {
         }
         console.log(name, email, password, pic)
         try {
-            // const config = {
-            //     headers: {
-            //         'Content-type': 'application/json',
-            //     },
-            // }
-            // const { data } = await axios.post(
-            //   "/api/user",
-            //   {
-            //     name,
-            //     email,
-            //     password,
-            //     pic,
-            //   },
-            //   config
-            // );
+            postUser({name, email, password})
 
             await createUserWithEmailAndPassword(auth, email, password)
 
@@ -98,6 +85,7 @@ const Signup = () => {
             // localStorage.setItem('userInfo', JSON.stringify(data))
             setPicLoading(false)
             history.push('/chats')
+            history.go()
         } catch (error) {
             toast({
                 title: 'Error Occured!',
