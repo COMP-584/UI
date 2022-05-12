@@ -7,7 +7,18 @@ import { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 
-import FirebaseApp from '../../firebase'
+// Firebase Auth
+import firebaseApp from '../../firebase'
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    connectAuthEmulator,
+} from 'firebase/auth'
+
+const auth = getAuth(firebaseApp)
 
 const Login = () => {
     const [show, setShow] = useState(false)
@@ -47,13 +58,27 @@ const Login = () => {
             //     config
             // )
 
-            const data = await FirebaseApp.auth()
-                .signInWithEmailAndPassword(email, password)
-                .catch(function (error) {
-                    throw error
-                })
+            // const data = await FirebaseApp.auth()
+            //     .signInWithEmailAndPassword(email, password)
+            //     .catch(function (error) {
+            //         throw error
+            //     })
 
-            console.log(data)
+            await signInWithEmailAndPassword(auth, email, password)
+
+            // Monitor auth state
+            const monitorAuthState = async () => {
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        console.log(user)
+                    } else {
+                        console.log('ezzz')
+                    }
+                })
+            }
+            monitorAuthState()
+
+            // console.log(data)
 
             toast({
                 title: 'Login Successful',
@@ -62,7 +87,7 @@ const Login = () => {
                 isClosable: true,
                 position: 'bottom',
             })
-            localStorage.setItem('userInfo', JSON.stringify(data))
+            // localStorage.setItem('userInfo', JSON.stringify(data))
             setLoading(false)
             history.push('/chats')
         } catch (error) {
