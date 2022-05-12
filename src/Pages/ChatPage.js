@@ -11,7 +11,7 @@ const auth = getAuth(firebaseApp)
 
 const ChatPage = () => {
     // const [chats, setChats] = useState([])
-    const [user, setUser] = useState()
+    const [user, setUser] = useState({ email: 'loading...' })
     const history = useHistory()
 
     // const fetchChats = async () => {
@@ -25,7 +25,7 @@ const ChatPage = () => {
     //     fetchChats()
     // }, [])
 
-    const monitorAuthState = async () => {
+    const monitorAuthState = async (setUser) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log(user)
@@ -37,7 +37,7 @@ const ChatPage = () => {
     }
 
     useEffect(() => {
-        monitorAuthState()
+        monitorAuthState(setUser)
     }, [])
 
     const handleSignOut = () => {
@@ -46,6 +46,7 @@ const ChatPage = () => {
                 // Sign-out successful.
                 console.log('// Sign-out successful.')
                 history.push('/')
+                history.go()
             })
             .catch((error) => {
                 console.log('// An error happened.')
@@ -54,7 +55,7 @@ const ChatPage = () => {
 
     return (
         <div>
-            <h2>welcom </h2>
+            <h2>welcom {user.email}</h2>
             <Button onClick={handleSignOut}>Signout</Button>
 
             {/*chats.map((chat) => (

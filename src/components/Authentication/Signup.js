@@ -78,6 +78,7 @@ const Signup = () => {
                     if (user) {
                         console.log(user)
                         history.push('/chats')
+                        history.go()
                     } else {
                         console.log('ezzz')
                     }
@@ -96,6 +97,7 @@ const Signup = () => {
             // localStorage.setItem('userInfo', JSON.stringify(data))
             setPicLoading(false)
             history.push('/chats')
+            history.go()
         } catch (error) {
             toast({
                 title: 'Error Occured!',
