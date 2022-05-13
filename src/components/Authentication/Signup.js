@@ -70,21 +70,17 @@ const Signup = () => {
             //   config
             // );
 
-            await createUserWithEmailAndPassword(auth, email, password)
-
-            // Monitor auth state
-            const monitorAuthState = async () => {
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        console.log(user)
-                        history.push('/chats')
-                        history.go()
-                    } else {
-                        console.log('ezzz')
-                    }
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user
+                    console.log(user)
+                    history.push('/chats')
+                    history.go()
                 })
-            }
-            monitorAuthState()
+                .catch((error) => {
+                    console.log('ezzz', error)
+                })
 
             // console.log(data)
             toast({
@@ -96,8 +92,8 @@ const Signup = () => {
             })
             // localStorage.setItem('userInfo', JSON.stringify(data))
             setPicLoading(false)
-            history.push('/chats')
-            history.go()
+            // history.push('/chats')
+            // history.go()
         } catch (error) {
             toast({
                 title: 'Error Occured!',
@@ -204,7 +200,7 @@ const Signup = () => {
                     </InputRightElement>
                 </InputGroup>
             </FormControl>
-            <FormControl id="pic">
+            {/*       <FormControl id="pic">
                 <FormLabel>Upload your Picture</FormLabel>
                 <Input
                     type="file"
@@ -213,6 +209,7 @@ const Signup = () => {
                     onChange={(e) => postDetails(e.target.files[0])}
                 />
             </FormControl>
+    */}
             <Button
                 colorScheme="blue"
                 width="100%"

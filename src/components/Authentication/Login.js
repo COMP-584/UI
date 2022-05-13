@@ -61,21 +61,17 @@ const Login = () => {
             //         throw error
             //     })
 
-            await signInWithEmailAndPassword(auth, email, password)
-
-            // Monitor auth state
-            const monitorAuthState = async () => {
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        console.log(user)
-                        history.push('/chats')
-                        history.go()
-                    } else {
-                        console.log('ezzz')
-                    }
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user
+                    console.log(user)
+                    history.push('/chats')
+                    history.go()
                 })
-            }
-            monitorAuthState()
+                .catch((error) => {
+                    console.log('ezzz', error)
+                })
 
             // console.log(data)
 

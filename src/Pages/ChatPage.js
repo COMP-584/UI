@@ -17,15 +17,16 @@ const ChatPage = () => {
     // const fetchChats = async () => {
     //     const { data } = await axios.get('/api/chat')
 
-    //console.log(data);
-    // setChats(data)
+    //     console.log(data);
+    //     setChats(data)
     // }
+
     // useEffect is hook in react which is used when the component is rendered for the first time.
     // useEffect(() => {
     //     fetchChats()
     // }, [])
 
-    const monitorAuthState = async (setUser) => {
+    useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log(user)
@@ -34,11 +35,7 @@ const ChatPage = () => {
                 console.log('User fetch Error!!!!')
             }
         })
-    }
-
-    useEffect(() => {
-        monitorAuthState(setUser)
-    }, [])
+    }, [user])
 
     const handleSignOut = () => {
         signOut(auth)
@@ -56,6 +53,7 @@ const ChatPage = () => {
     return (
         <div>
             <h2>welcom {user.email}</h2>
+            <p>User ID : {user.uid}</p>
             <Button onClick={handleSignOut}>Signout</Button>
 
             {/*chats.map((chat) => (
