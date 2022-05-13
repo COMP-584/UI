@@ -12,10 +12,7 @@ import firebaseApp from '../../firebase'
 import {
     getAuth,
     onAuthStateChanged,
-    signOut,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    connectAuthEmulator,
 } from 'firebase/auth'
 
 const auth = getAuth(firebaseApp)
@@ -67,6 +64,8 @@ const Signup = () => {
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         console.log(user)
+                        history.push('/chats')
+                        history.go()
                     } else {
                         console.log('ezzz')
                     }
@@ -89,7 +88,7 @@ const Signup = () => {
         } catch (error) {
             toast({
                 title: 'Error Occured!',
-                description: error.response.data.message,
+                description: 'SIGNUP ERROR', //error.response.data.message,
                 status: 'error',
                 duration: 5000,
                 isClosable: true,

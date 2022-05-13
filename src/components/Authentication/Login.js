@@ -5,11 +5,18 @@ import { VStack } from '@chakra-ui/layout'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
 import { useToast } from '@chakra-ui/react'
-
-
-import FirebaseApp from '../../firebase'
-
 import {loginUser} from "../../api/user/userApi"
+
+// Firebase Auth
+import firebaseApp from "../../firebase"
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+} from 'firebase/auth'
+
+const auth = getAuth(firebaseApp)
+
 
 const Login = () => {
     const [show, setShow] = useState(false)
@@ -38,35 +45,51 @@ const Login = () => {
             console.log(email, password)
             loginUser({ email, password })
 
-            // const data = await FirebaseApp.auth()
+            // const data = await firebaseApp.auth()
             //     .signInWithEmailAndPassword(email, password)
             //     .catch(function (error) {
             //         throw error
             //     })
 
+            // await signInWithEmailAndPassword(auth, email, password)
+
+            // Monitor auth state
+            // const monitorAuthState = async () => {
+            //     onAuthStateChanged(auth, (user) => {
+            //         if (user) {
+            //             console.log(user)
+            //             history.push('/chats')
+            //             history.go()
+            //         } else {
+            //             console.log('ezzz')
+            //         }
+            //     })
+            // }
+            // monitorAuthState()
+
             // console.log(data)
 
-            // toast({
-            //     title: 'Login Successful',
-            //     status: 'success',
-            //     duration: 5000,
-            //     isClosable: true,
-            //     position: 'bottom',
-            // })
+            toast({
+                title: 'Login Successful',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+                position: 'bottom',
+            })
             // localStorage.setItem('userInfo', JSON.stringify(data))
             setLoading(false)
             history.push('/chats')
             history.go()
-            
         } catch (error) {
-            // toast({
-            //     title: 'Error Occured!',
-            //     description: error.response.data.message,
-            //     status: 'error',
-            //     duration: 5000,
-            //     isClosable: true,
-            //     position: 'bottom',
-            // })
+            console.log(error.response)
+            toast({
+                title: 'Error Occured!',
+                description: error.response,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: 'bottom',
+            })
             console.log(error)
             setLoading(false)
         }
