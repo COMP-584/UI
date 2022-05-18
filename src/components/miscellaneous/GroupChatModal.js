@@ -18,7 +18,6 @@ import { useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import UserBadgeItem from "../userAvatar/UserBadgeItem";
 import UserListItem from "../userAvatar/UserListItem";
-// import ChatLoading from "../ChatLoading";
 
 
 const GroupChatModal = ({ children }) => {
@@ -168,13 +167,8 @@ const GroupChatModal = ({ children }) => {
               ))}
             </Box>
             {loading ? (
-              // <ChatLoading />
               <div>Loading...</div>
             ) : (
-              // searchResult
-              //   .map((user) => (
-              // 
-              // )
               searchResult.map((user) => {
                 return (
                   <UserListItem
