@@ -1,68 +1,25 @@
-import { useEffect, useState } from 'react'
-// import axios from 'axios'
+import { Box } from "@chakra-ui/layout";
+import { useState } from "react";
+import Chatbox from "../components/Chatbox";
+import MyChats from "../components/MyChats";
+import SideDrawer from "../components/miscellaneous/SideDrawer";
+import { ChatState } from "../Context/ChatProvider";
 
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+const Chatpage = () => {
+  const [fetchAgain, setFetchAgain] = useState(false);
+  const { user } = ChatState();
 
-import firebaseApp from '../firebase'
-import { Button } from '@chakra-ui/react'
-import { useHistory } from 'react-router'
+  return (
+    <div style={{ width: "100%" }}>
+      {user && <SideDrawer />}
+      <Box d="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px">
+        {user && <MyChats fetchAgain={fetchAgain} />}
+        {user && (
+          <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        )}
+      </Box>
+    </div>
+  );
+};
 
-const auth = getAuth(firebaseApp)
-
-const ChatPage = () => {
-    // const [chats, setChats] = useState([])
-    const [user, setUser] = useState({ email: 'loading...' })
-    const history = useHistory()
-
-    // const fetchChats = async () => {
-    //     const { data } = await axios.get('/api/chat')
-
-    //console.log(data);
-    // setChats(data)
-    // }
-    // useEffect is hook in react which is used when the component is rendered for the first time.
-    // useEffect(() => {
-    //     fetchChats()
-    // }, [])
-
-    const monitorAuthState = async (setUser) => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log(user)
-                setUser(user)
-            } else {
-                console.log('User fetch Error!!!!')
-            }
-        })
-    }
-
-    useEffect(() => {
-        monitorAuthState(setUser)
-    }, [])
-
-    const handleSignOut = () => {
-        signOut(auth)
-            .then(() => {
-                // Sign-out successful.
-                console.log('// Sign-out successful.')
-                history.push('/')
-                history.go()
-            })
-            .catch((error) => {
-                console.log('// An error happened.')
-            })
-    }
-
-    return (
-        <div>
-            <h2>welcom {user.email}</h2>
-            <Button onClick={handleSignOut}>Signout</Button>
-
-            {/*chats.map((chat) => (
-                <div key={chat._id}>{chat.chatName}</div>
-            ))*/}
-        </div>
-    )
-}
-
-export default ChatPage
+export default Chatpage;
