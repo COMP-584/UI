@@ -31,7 +31,6 @@ const Login = () => {
       return;
     }
 
-    // console.log(email, password);
     try {
       const config = {
         headers: {
@@ -45,7 +44,6 @@ const Login = () => {
         config
       );
 
-      // console.log(JSON.stringify(data));
       toast({
         title: "Login Successful",
         status: "success",
@@ -56,6 +54,7 @@ const Login = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       history.push("/chats");
+      history.go()
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -71,7 +70,7 @@ const Login = () => {
 
   return (
     <VStack spacing="10px">
-      <FormControl id="email" isRequired>
+      <FormControl id="email"  isRequired>
         <FormLabel>Email Address</FormLabel>
         <Input
           value={email}
@@ -104,17 +103,6 @@ const Login = () => {
         isLoading={loading}
       >
         Login
-      </Button>
-      <Button
-        variant="solid"
-        colorScheme="red"
-        width="100%"
-        onClick={() => {
-          setEmail("guest@example.com");
-          setPassword("123456");
-        }}
-      >
-        Get Guest User Credentials
       </Button>
     </VStack>
   );
