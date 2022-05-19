@@ -1,4 +1,4 @@
-import { ViewIcon } from '@chakra-ui/icons'
+import { ViewIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import {
     Modal,
     ModalOverlay,
@@ -14,6 +14,10 @@ import {
     useToast,
     Box,
     IconButton,
+    Menu,
+    MenuItem,
+    MenuList,
+    MenuButton,
     Spinner,
 } from '@chakra-ui/react'
 import axios from 'axios'
@@ -33,7 +37,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
     const [renameloading, setRenameLoading] = useState(false)
     const toast = useToast()
 
-    const { selectedChat, setSelectedChat, user } = ChatState()
+    const { selectedChat, setSelectedChat, user, setLang } = ChatState()
 
     const handleSearch = async (query) => {
         setSearch(query)
@@ -213,11 +217,25 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
 
     return (
         <>
-            <IconButton
-                d={{ base: 'flex' }}
-                icon={<ViewIcon />}
-                onClick={onOpen}
-            />
+            <>
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        Change Language
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem onClick={() => setLang('hi')}>Hindi</MenuItem>
+                        <MenuItem onClick={() => setLang('es')}>
+                            Spanish
+                        </MenuItem>
+                        <MenuItem>More langs on the way</MenuItem>
+                    </MenuList>
+                </Menu>
+                <IconButton
+                    d={{ base: 'flex' }}
+                    icon={<ViewIcon />}
+                    onClick={onOpen}
+                />
+            </>
 
             <Modal onClose={onClose} isOpen={isOpen} isCentered>
                 <ModalOverlay />

@@ -9,7 +9,7 @@ import {
     isSameUser,
 } from '../config/ChatLogics'
 
-const Message = ({ messages, i, m, user_id }) => {
+const Message = ({ messages, i, m, user_id, lang }) => {
     const [translation, setTranslation] = useState('')
 
     const getTranslation = async (text) => {
@@ -18,7 +18,7 @@ const Message = ({ messages, i, m, user_id }) => {
             body: JSON.stringify({
                 q: text,
                 source: 'en',
-                target: 'hi',
+                target: lang,
                 format: 'text',
             }),
             headers: { 'Content-Type': 'application/json' },
