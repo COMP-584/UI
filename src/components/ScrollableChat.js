@@ -56,14 +56,19 @@ const ScrollableChat = ({ messages }) => {
                                 maxWidth: '75%',
                             }}
                         >
-                            <span
-                                style={{
-                                    textDecoration: 'underline',
-                                }}
-                            >
-                                {m.sender.name}
-                            </span>
-                            <br />
+                            {m.sender._id !== user._id && (
+                                <>
+                                    <span
+                                        style={{
+                                            textDecoration: 'underline',
+                                        }}
+                                    >
+                                        {m.sender.name}
+                                    </span>
+                                    <br />
+                                </>
+                            )}
+
                             {m.content}
                         </span>
                     </div>
