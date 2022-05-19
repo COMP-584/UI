@@ -1,4 +1,4 @@
-import { ViewIcon, ChevronDownIcon } from '@chakra-ui/icons'
+import { ViewIcon } from '@chakra-ui/icons'
 import {
     Modal,
     ModalOverlay,
@@ -14,10 +14,6 @@ import {
     useToast,
     Box,
     IconButton,
-    Menu,
-    MenuItem,
-    MenuList,
-    MenuButton,
     Spinner,
 } from '@chakra-ui/react'
 import axios from 'axios'
@@ -25,6 +21,8 @@ import { useState } from 'react'
 import { ChatState } from '../../Context/ChatProvider'
 import UserBadgeItem from '../userAvatar/UserBadgeItem'
 import UserListItem from '../userAvatar/UserListItem'
+
+import LanguageChanger from './LangChanger'
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL
 
@@ -218,21 +216,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
     return (
         <>
             <>
-                <Menu>
-                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                        Change Language
-                    </MenuButton>
-                    <MenuList>
-                        <MenuItem onClick={() => setLang('hi')}>Hindi</MenuItem>
-                        <MenuItem onClick={() => setLang('en')}>
-                            English
-                        </MenuItem>
-                        <MenuItem onClick={() => setLang('es')}>
-                            Spanish
-                        </MenuItem>
-                        <MenuItem>More langs on the way</MenuItem>
-                    </MenuList>
-                </Menu>
+                <LanguageChanger title={'Change Language'} setLang={setLang} />
                 <IconButton
                     d={{ base: 'flex' }}
                     icon={<ViewIcon />}

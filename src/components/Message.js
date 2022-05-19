@@ -13,11 +13,22 @@ const Message = ({ messages, i, m, user_id, lang, myLang }) => {
     const [translation, setTranslation] = useState('')
 
     const getTranslation = async (text) => {
+        const res1 = await fetch('https://libretranslate.de/detect', {
+            method: 'POST',
+            body: JSON.stringify({
+                q: text,
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        })
+
+        let langCode = await res1.json()
+        console.log('---> Lang code', langCode)
+
         const res = await fetch('https://libretranslate.de/translate', {
             method: 'POST',
             body: JSON.stringify({
                 q: text,
-                source: myLang,
+                source: langCode[0].language,
                 target: lang,
                 format: 'text',
             }),

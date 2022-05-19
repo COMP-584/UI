@@ -5,12 +5,8 @@ import {
     ModalContent,
     ModalHeader,
     ModalFooter,
-    Menu,
     ModalBody,
     ModalCloseButton,
-    MenuButton,
-    MenuItem,
-    MenuList,
     Button,
     useDisclosure,
     IconButton,
@@ -19,6 +15,8 @@ import {
 } from '@chakra-ui/react'
 
 import { ChatState } from '../../Context/ChatProvider'
+
+import LanguageChanger from './LangChanger'
 
 const ProfileModal = ({ user, children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -66,26 +64,10 @@ const ProfileModal = ({ user, children }) => {
                         >
                             Email: {user.email}
                         </Text>
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                rightIcon={<ChevronDownIcon />}
-                            >
-                                Change Your Main Language
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem onClick={() => setMyLang('hi')}>
-                                    Hindi
-                                </MenuItem>
-                                <MenuItem onClick={() => setMyLang('en')}>
-                                    English
-                                </MenuItem>
-                                <MenuItem onClick={() => setMyLang('es')}>
-                                    Spanish
-                                </MenuItem>
-                                <MenuItem>More langs on the way</MenuItem>
-                            </MenuList>
-                        </Menu>
+                        {/*<LanguageChanger
+                            title={'Change your main language'}
+                            setLang={setMyLang}
+            />*/}
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={onClose}>Close</Button>
