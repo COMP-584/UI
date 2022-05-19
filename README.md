@@ -2,6 +2,8 @@
 
 ![Chat App](./public/favicon.ico)
 
+using https://libretranslate.de/ for translation
+
 ## Running the React App
 
 1. Install dependencies

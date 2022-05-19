@@ -9,6 +9,7 @@ const ChatProvider = ({ children }) => {
     const [notification, setNotification] = useState([])
     const [chats, setChats] = useState()
     const [lang, setLang] = useState('es') // default translates to Spanish
+    const [myLang, setMyLang] = useState('en') // default user lang is english
 
     const history = useHistory()
 
@@ -36,6 +37,8 @@ const ChatProvider = ({ children }) => {
                 setChats,
                 lang,
                 setLang,
+                myLang,
+                setMyLang,
             }}
         >
             {children}

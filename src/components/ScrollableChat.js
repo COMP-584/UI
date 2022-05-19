@@ -4,7 +4,7 @@ import { ChatState } from '../Context/ChatProvider'
 import Message from './Message'
 
 const ScrollableChat = ({ messages }) => {
-    const { user, lang } = ChatState()
+    const { user, lang, myLang } = ChatState()
 
     return (
         <ScrollableFeed>
@@ -17,6 +17,7 @@ const ScrollableChat = ({ messages }) => {
                         m={m}
                         user_id={user._id}
                         lang={lang}
+                        myLang={myLang}
                     />
                 ))}
         </ScrollableFeed>

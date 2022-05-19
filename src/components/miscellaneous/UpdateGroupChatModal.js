@@ -224,6 +224,9 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                     </MenuButton>
                     <MenuList>
                         <MenuItem onClick={() => setLang('hi')}>Hindi</MenuItem>
+                        <MenuItem onClick={() => setLang('en')}>
+                            English
+                        </MenuItem>
                         <MenuItem onClick={() => setLang('es')}>
                             Spanish
                         </MenuItem>
