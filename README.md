@@ -1,5 +1,7 @@
 # Char App
 
+![Chat App](./public/favicon.ico)
+
 ## Running the React App
 
 1. Install dependencies

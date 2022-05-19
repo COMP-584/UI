@@ -37,7 +37,7 @@ function SideDrawer() {
                 borderWidth="5px"
             >
                 <Text fontSize="2xl" fontFamily="Work sans">
-                    Talk-A-Tive
+                    Chat App
                 </Text>
                 <div>
                     <Menu>

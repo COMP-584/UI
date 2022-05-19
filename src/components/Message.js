@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Avatar } from '@chakra-ui/avatar'
 import { Tooltip } from '@chakra-ui/tooltip'
-import { useEffect } from 'react'
+
 import {
     isLastMessage,
     isSameSender,
