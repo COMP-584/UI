@@ -23,6 +23,7 @@ const Message = ({ messages, i, m, user_id, lang, myLang }) => {
 
         let langCode = await res1.json()
         console.log('---> Lang code', langCode)
+        console.log('From', langCode[0].language, 'To', lang)
 
         const res = await fetch('https://libretranslate.de/translate', {
             method: 'POST',

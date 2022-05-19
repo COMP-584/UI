@@ -1,27 +1,20 @@
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import {
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
-    Button,
-    IconButton,
-} from '@chakra-ui/react'
+import { Select } from '@chakra-ui/react'
+
+import codes from 'iso-language-codes'
 
 const LanguageChanger = ({ title, setLang }) => {
     return (
         <div>
-            <Menu>
-                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                    {title}
-                </MenuButton>
-                <MenuList>
-                    <MenuItem onClick={() => setLang('en')}>English</MenuItem>
-                    <MenuItem onClick={() => setLang('hi')}>Hindi</MenuItem>
-                    <MenuItem onClick={() => setLang('es')}>Spanish</MenuItem>
-                    <MenuItem>More langs on the way</MenuItem>
-                </MenuList>
-            </Menu>
+            <Select
+                placeholder={title}
+                onChange={(e) => setLang(e.target.value)}
+            >
+                {codes.map((code, i) => (
+                    <option key={i} value={code.iso639_1}>
+                        {code.name}
+                    </option>
+                ))}
+            </Select>
         </div>
     )
 }

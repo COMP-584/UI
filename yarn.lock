@@ -6064,6 +6064,11 @@
   "resolved" "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
   "version" "2.0.0"
 
+"iso-language-codes@^1.1.0":
+  "integrity" "sha512-keIujxUvEAFeEd4esZZM0w+Hbek+G+JWsWs8phODkNvSq8NE2w68ZVD8ZpOUurX8/3ElQyPll0952J06wQNKvA=="
+  "resolved" "https://registry.npmjs.org/iso-language-codes/-/iso-language-codes-1.1.0.tgz"
+  "version" "1.1.0"
+
 "isobject@^3.0.1":
   "integrity" "sha1-TkMekrEalzFjaqH5yNHMvP2reN8="
   "resolved" "https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz"
